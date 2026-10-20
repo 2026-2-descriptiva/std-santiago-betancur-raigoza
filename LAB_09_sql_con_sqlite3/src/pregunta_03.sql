@@ -26,3 +26,4 @@
 --
 --  Escriba su consulta debajo de esta línea.
 --
+Select K0, K1, c12, c13, c14, c15, c16 from tbl1 order by c14 limit 5;

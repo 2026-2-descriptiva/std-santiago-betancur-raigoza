@@ -22,3 +22,4 @@
 --
 --  Escriba su consulta debajo de esta línea.
 --
+SELECT 2018, COUNT(*) FROM tbl1 WHERE c14 LIKE '2018-%';

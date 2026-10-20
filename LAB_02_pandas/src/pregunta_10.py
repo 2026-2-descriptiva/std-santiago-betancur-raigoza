@@ -1,18 +1,32 @@
+# def pregunta_10():
+#     """
+#     Usando `data/tbl0.tsv`, construya para cada categoría de la columna `c1`
+#     un texto con todos sus valores de la columna `c2`, ordenados de menor a
+#     mayor y separados por `:`. Retorne un DataFrame cuyo índice son las
+#     categorías, en orden alfabético, con una única columna llamada `c2`.
+
+#     Ejemplo del formato de la respuesta:
+
+#                            c2
+#         c1
+#         A     1:1:2:3:6:7:8:9
+#         B       1:3:4:5:6:8:9
+#         C           0:5:6:7:9
+#         ...
+#     """
+
+#     raise NotImplementedError
+import pandas as pd
+from pathlib import Path
+
+
 def pregunta_10():
-    """
-    Usando `data/tbl0.tsv`, construya para cada categoría de la columna `c1`
-    un texto con todos sus valores de la columna `c2`, ordenados de menor a
-    mayor y separados por `:`. Retorne un DataFrame cuyo índice son las
-    categorías, en orden alfabético, con una única columna llamada `c2`.
-
-    Ejemplo del formato de la respuesta:
-
-                           c2
-        c1
-        A     1:1:2:3:6:7:8:9
-        B       1:3:4:5:6:8:9
-        C           0:5:6:7:9
-        ...
-    """
-
-    raise NotImplementedError
+    """Retorne los valores de `c2` por `c1`, ordenados y unidos con `:`."""
+    path = Path(__file__).resolve().parents[1] / "data" / "tbl0.tsv"
+    table = pd.read_csv(path, sep="\t")
+    result = table.groupby("c1")["c2"].agg(
+        lambda values: ":".join(str(value) for value in sorted(values))
+    ).to_frame()
+    result.index.name = "_c1"
+    return result
+    # raise NotImplementedError
